@@ -1,9 +1,9 @@
-import { Image, Text, View } from "react-native";
+import { Image, Pressable, Text, View } from "react-native";
 import React from "react";
 import styled from "styled-components/native";
 import MolText from "../../atom/Text/Text";
 
-const Widget = () => {
+const Widget = ({ navigate }: { navigate: any }) => {
   return (
     <Container>
       <MolText
@@ -22,30 +22,44 @@ const Widget = () => {
         mt="2"
       />
       <ButtonContainer>
-        <ButtonTextWrapper>
-          <Image
-            source={require("../../../assets/png/resultImg1.png")}
-            style={{
-              width: 88,
-              height: 88,
-              marginBottom: 4,
-              objectFit: "contain",
-            }}
-          />
-          <MolText color="black" label="위로해주기" align="center" size="17" />
-        </ButtonTextWrapper>
-        <ButtonTextWrapper>
-          <Image
-            source={require("../../../assets/png/resultImg2.png")}
-            style={{
-              width: 88,
-              height: 88,
-              marginBottom: 4,
-              objectFit: "contain",
-            }}
-          />
-          <MolText color="black" label="편들어주기" align="center" size="17" />
-        </ButtonTextWrapper>
+        <Pressable onPress={() => navigate("DiaryAnswer")}>
+          <ButtonTextWrapper>
+            <Image
+              source={require("../../../assets/png/resultImg1.png")}
+              style={{
+                width: 88,
+                height: 88,
+                marginBottom: 4,
+                objectFit: "contain",
+              }}
+            />
+            <MolText
+              color="black"
+              label="위로해주기"
+              align="center"
+              size="17"
+            />
+          </ButtonTextWrapper>
+        </Pressable>
+        <Pressable onPress={() => navigate("DiaryAnswer")}>
+          <ButtonTextWrapper>
+            <Image
+              source={require("../../../assets/png/resultImg2.png")}
+              style={{
+                width: 88,
+                height: 88,
+                marginBottom: 4,
+                objectFit: "contain",
+              }}
+            />
+            <MolText
+              color="black"
+              label="편들어주기"
+              align="center"
+              size="17"
+            />
+          </ButtonTextWrapper>
+        </Pressable>
       </ButtonContainer>
     </Container>
   );

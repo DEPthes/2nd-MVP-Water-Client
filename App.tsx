@@ -12,6 +12,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Main from "./pages/Main";
 import DiaryWriting from "./pages/Diary/DiaryWriting";
 import BackButton from "./assets/svg/BackButton";
+import DiaryAnswer from "./pages/Diary/DiaryAnswer";
 
 function App() {
   const Tab = createNativeStackNavigator();
@@ -35,6 +36,15 @@ function App() {
                 <BackButton />
               </Pressable>
             ),
+          })}
+        />
+        <Tab.Screen
+          name="DiaryAnswer"
+          component={DiaryAnswer}
+          options={() => ({
+            title: "일기 쓰기",
+            headerTransparent: true, // Make header transparent
+            headerLeft: () => <></>,
           })}
         />
       </Tab.Navigator>
