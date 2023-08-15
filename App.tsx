@@ -42,6 +42,16 @@ function App() {
           })}
         />
         <Tab.Screen
+          name="DiaryAnswer"
+          component={DiaryAnswer}
+          options={() => ({
+            title: "일기 쓰기",
+            headerTransparent: true, // Make header transparent
+            headerLeft: () => <></>,
+          })}
+        />
+
+        <Tab.Screen
           name="CrystalReply"
           component={CrystalReply}
           options={({ navigation }) => ({
