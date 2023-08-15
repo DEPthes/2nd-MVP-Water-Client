@@ -3,7 +3,7 @@ import Svg, { Circle, Path, Defs } from "react-native-svg";
 
 const ButtonMyPage: React.FC = () => {
   return (
-    <Svg width={50} height={50} viewBox="0 0 1024 1024">
+    <Svg width={40} height={40} viewBox="0 0 1024 1024">
       <Circle
         cx={512}
         cy={321.81}

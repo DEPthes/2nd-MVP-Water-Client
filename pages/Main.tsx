@@ -6,13 +6,14 @@ import ButtonStorage from "../assets/svg/ButtonStorage";
 import Storage from "./Storage";
 import Home from "./Home";
 import MyPage from "./MyPage";
+import styled from "styled-components/native";
 
 const Main = () => {
   const Tab = createBottomTabNavigator();
   return (
     <Tab.Navigator
       screenOptions={{
-        tabBarStyle: { backgroundColor: "#71CEF7" },
+        tabBarStyle: { backgroundColor: "#71CEF7", height: 60 },
         tabBarLabel: () => null,
       }}
       initialRouteName="Home"
@@ -27,7 +28,11 @@ const Main = () => {
             borderBottomWidth: 1,
             borderBottomColor: "gray",
           },
-          tabBarIcon: () => <ButtonStorage />,
+          tabBarIcon: () => (
+            <ButtonContainer>
+              <ButtonStorage />
+            </ButtonContainer>
+          ),
         }}
       />
       <Tab.Screen
@@ -42,9 +47,9 @@ const Main = () => {
             <Image
               source={require(".././assets/png/ButtonHome.png")}
               style={{
-                width: 76,
-                height: 90,
-                marginBottom: 18,
+                width: 66,
+                height: 80,
+                marginBottom: 4,
                 objectFit: "contain",
               }}
             />
@@ -57,7 +62,11 @@ const Main = () => {
         options={{
           title: "",
           headerTransparent: true,
-          tabBarIcon: () => <ButtonMyPage />,
+          tabBarIcon: () => (
+            <ButtonContainer>
+              <ButtonMyPage />
+            </ButtonContainer>
+          ),
         }}
       />
     </Tab.Navigator>
@@ -65,3 +74,7 @@ const Main = () => {
 };
 
 export default Main;
+
+const ButtonContainer = styled.View`
+  margin-top: 25px;
+`;
