@@ -1,6 +1,7 @@
 {
   "expo": {
     "name": "AwesomeStorybook",
-    "slug": "AwesomeStorybook"
+    "slug": "AwesomeStorybook",
+    "assets": ["./assets/png"]
   }
 }
