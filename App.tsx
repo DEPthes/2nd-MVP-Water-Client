@@ -1,4 +1,4 @@
-import { Button, Image, StyleSheet, Text, View } from "react-native";
+import { Button, Image, Pressable, StyleSheet, Text, View } from "react-native";
 import Constants from "expo-constants";
 import styled from "styled-components/native";
 import { NavigationContainer } from "@react-navigation/native";
@@ -11,17 +11,31 @@ import ButtonMyPage from "./assets/svg/ButtonMyPage";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Main from "./pages/Main";
 import DiaryWriting from "./pages/Diary/DiaryWriting";
+import BackButton from "./assets/svg/BackButton";
 
 function App() {
   const Tab = createNativeStackNavigator();
   return (
     <NavigationContainer>
-      <Tab.Navigator
-        initialRouteName="Main"
-        screenOptions={{ headerShown: false }}
-      >
-        <Tab.Screen name="Main" component={Main} />
-        <Tab.Screen name="DiaryWriting" component={DiaryWriting} />
+      <Tab.Navigator initialRouteName="Main">
+        <Tab.Screen
+          name="Main"
+          component={Main}
+          options={{ headerShown: false }}
+        />
+        <Tab.Screen
+          name="DiaryWriting"
+          component={DiaryWriting}
+          options={({ navigation }) => ({
+            title: "Diary Writing",
+            headerLeft: () => (
+              <Pressable onPress={() => navigation.goBack()}>
+                <BackButton />
+              </Pressable>
+            ),
+            headerTitle: "Your Title Here",
+          })}
+        />
       </Tab.Navigator>
     </NavigationContainer>
   );
