@@ -15,6 +15,10 @@ const Main = () => {
       screenOptions={{
         tabBarStyle: { backgroundColor: "#71CEF7", height: 60 },
         tabBarLabel: () => null,
+        headerStyle: {
+          backgroundColor: "transparent", // Make the header transparent
+        },
+        headerTransparent: true, // Apply transparency to the header
       }}
       initialRouteName="Home"
     >
