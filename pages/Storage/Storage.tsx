@@ -3,16 +3,17 @@ import React from "react";
 import styled from "styled-components/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import MolText from "../../components/atom/Text/Text";
+import Background from "../../components/atom/background/Background";
 
 const Storage = () => {
   return (
-    <SafeAreaView>
+    <Background>
       <Container>
         <TitleContainer>
           <MolText label="결정보관함" size="17" weight="regular" />
         </TitleContainer>
       </Container>
-    </SafeAreaView>
+    </Background>
   );
 };
 
