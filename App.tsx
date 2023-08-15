@@ -5,7 +5,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "./pages/Home";
 import MyPage from "./pages/MyPage";
-import Storage from "./pages/Storage";
+import Storage from "./pages/Storage/Storage";
 import ButtonStorage from "./assets/svg/ButtonStorage";
 import ButtonMyPage from "./assets/svg/ButtonMyPage";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";

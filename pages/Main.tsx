@@ -3,7 +3,7 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import ButtonMyPage from "../assets/svg/ButtonMyPage";
 import ButtonStorage from "../assets/svg/ButtonStorage";
-import Storage from "./Storage";
+import Storage from "./Storage/Storage";
 import Home from "./Home";
 import MyPage from "./MyPage";
 import styled from "styled-components/native";
@@ -30,7 +30,7 @@ const Main = () => {
           headerStyle: {
             backgroundColor: "transparent",
             borderBottomWidth: 1,
-            borderBottomColor: "gray",
+            borderBottomColor: "transparent",
           },
           tabBarIcon: () => (
             <ButtonContainer>
@@ -81,4 +81,10 @@ export default Main;
 
 const ButtonContainer = styled.View`
   margin-top: 25px;
+`;
+const TabTitle = styled.Text`
+  color: #000;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 24px;
 `;
