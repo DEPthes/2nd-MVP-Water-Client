@@ -1,12 +1,16 @@
 import { Text, View } from "react-native";
 import React, { Component } from "react";
+import Background from "../../components/atom/background/Background";
 
 export class DiaryWriting extends Component {
   render() {
     return (
-      <View>
+      <Background>
         <Text>DiaryWriting</Text>
-      </View>
+        <Text>DiaryWriting</Text>
+        <Text>DiaryWriting</Text>
+        <Text>DiaryWriting</Text>
+      </Background>
     );
   }
 }
