@@ -4,7 +4,7 @@ import { MyButton } from "./Button";
 import { View } from "react-native";
 
 const MyButtonMeta: ComponentMeta<typeof MyButton> = {
-  title: "MyButton",
+  title: "atom/button",
   component: MyButton,
   args: {
     text: "Hello world",

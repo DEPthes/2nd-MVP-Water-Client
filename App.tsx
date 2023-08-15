@@ -10,6 +10,7 @@ import ButtonStorage from "./assets/svg/ButtonStorage";
 import ButtonMyPage from "./assets/svg/ButtonMyPage";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Main from "./pages/Main";
+import DiaryWriting from "./pages/Diary/DiaryWriting";
 
 function App() {
   const Tab = createNativeStackNavigator();
@@ -20,6 +21,7 @@ function App() {
         screenOptions={{ headerShown: false }}
       >
         <Tab.Screen name="Main" component={Main} />
+        <Tab.Screen name="DiaryWriting" component={DiaryWriting} />
       </Tab.Navigator>
     </NavigationContainer>
   );

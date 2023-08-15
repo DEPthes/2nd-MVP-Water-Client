@@ -3,7 +3,7 @@ import Svg, { Circle, Path, Defs, Rect } from "react-native-svg";
 
 const ButtonStorage: React.FC = () => {
   return (
-    <Svg width={50} height={50} viewBox="0 0 1024 1024">
+    <Svg width={40} height={40} viewBox="0 0 1024 1024">
       <Path
         d="M121.2,331.34H904.56V891.57c0,11.27-9.15,20.43-20.43,20.43H141.63c-11.27,0-20.43-9.15-20.43-20.43V331.34h0Z"
         fill="none"

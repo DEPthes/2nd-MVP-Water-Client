@@ -48,9 +48,14 @@ try {
 } catch {}
 
 const getStories = () => {
-  return {
-    "./components/Button/Button.stories.tsx": require("../components/Button/Button.stories.tsx"),
-  };
+  const context = require.context("../components", true, /\.stories\.tsx$/);
+  const stories = {};
+
+  context.keys().forEach((key) => {
+    stories[key] = context(key);
+  });
+
+  return stories;
 };
 
 configure(getStories, module, false);
