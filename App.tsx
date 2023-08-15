@@ -27,13 +27,14 @@ function App() {
           name="DiaryWriting"
           component={DiaryWriting}
           options={({ navigation }) => ({
-            title: "Diary Writing",
+            title: "일기 쓰기",
+            headerTransparent: true, // Make header transparent
+
             headerLeft: () => (
               <Pressable onPress={() => navigation.goBack()}>
                 <BackButton />
               </Pressable>
             ),
-            headerTitle: "Your Title Here",
           })}
         />
       </Tab.Navigator>
@@ -80,3 +81,12 @@ export default AppEntryPoint;
 //     />
 //   </View>
 // ),
+
+const CutomHeader = styled.View`
+  width: "100%";
+  height: "100%";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid red;
+`;
