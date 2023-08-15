@@ -7,6 +7,7 @@ import Storage from "./Storage/Storage";
 import Home from "./Home";
 import MyPage from "./MyPage";
 import styled from "styled-components/native";
+import CustomHeader from "../components/molecule/header/CustomHeader";
 
 const Main = () => {
   const Tab = createBottomTabNavigator();
@@ -27,6 +28,14 @@ const Main = () => {
         component={Storage}
         options={{
           title: "결정 보관함",
+          header: () => (
+            <CustomHeader
+              navigation={""}
+              title="결정 보관함"
+              showBackButton={false}
+              showBottomLine={true}
+            />
+          ),
           headerStyle: {
             backgroundColor: "transparent",
             borderBottomWidth: 1,
@@ -39,6 +48,7 @@ const Main = () => {
           ),
         }}
       />
+
       <Tab.Screen
         name="Home"
         component={Home}

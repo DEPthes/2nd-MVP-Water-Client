@@ -12,6 +12,9 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Main from "./pages/Main";
 import DiaryWriting from "./pages/Diary/DiaryWriting";
 import BackButton from "./assets/svg/BackButton";
+import CrystalReply from "./pages/Storage/CrystalReply";
+import React from "react";
+import CustomHeader from "./components/molecule/header/CustomHeader";
 
 function App() {
   const Tab = createNativeStackNavigator();
@@ -34,6 +37,22 @@ function App() {
               <Pressable onPress={() => navigation.goBack()}>
                 <BackButton />
               </Pressable>
+            ),
+          })}
+        />
+        <Tab.Screen
+          name="CrystalReply"
+          component={CrystalReply}
+          options={({ navigation }) => ({
+            title: "결정 보관함",
+
+            header: () => (
+              <CustomHeader
+                navigation={navigation}
+                title="결정 보관함"
+                showBackButton={true}
+                showBottomLine={true}
+              />
             ),
           })}
         />
@@ -81,12 +100,3 @@ export default AppEntryPoint;
 //     />
 //   </View>
 // ),
-
-const CutomHeader = styled.View`
-  width: "100%";
-  height: "100%";
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 2px solid red;
-`;
