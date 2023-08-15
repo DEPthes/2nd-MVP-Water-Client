@@ -20,7 +20,7 @@ export const DiaryWriting = ({ navigation }: { navigation: any }) => {
     <>
       {onWidget ? (
         <WidgetContainer>
-          <Widget />
+          <Widget navigate={navigation.navigate} />
         </WidgetContainer>
       ) : (
         <></>

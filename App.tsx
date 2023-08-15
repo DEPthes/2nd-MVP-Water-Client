@@ -15,6 +15,7 @@ import BackButton from "./assets/svg/BackButton";
 import CrystalReply from "./pages/Storage/CrystalReply";
 import React from "react";
 import CustomHeader from "./components/molecule/header/CustomHeader";
+import DiaryAnswer from "./pages/Diary/DiaryAnswer";
 
 function App() {
   const Tab = createNativeStackNavigator();
