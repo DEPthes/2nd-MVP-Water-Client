@@ -7,11 +7,15 @@ type TextWeight = "regular" | "bold";
 
 type TextAlign = "left" | "center";
 
+type TextColor = "white" | "black";
+
 type TextProps = HTMLAttributes<HTMLParagraphElement> & {
   size?: TextSize;
   weight?: TextWeight;
   label: string;
   align: TextAlign;
+  color: TextColor;
+  mt?: string;
 };
 
 const MolText = (props: TextProps) => {
@@ -19,12 +23,14 @@ const MolText = (props: TextProps) => {
     size = "12",
     weight = "regular",
     align = "left",
+    color = "black",
     label,
+    mt = "0",
     ...restProps
   } = props;
 
   return (
-    <StyledText size={size} weight={weight} align={align}>
+    <StyledText size={size} weight={weight} align={align} color={color} mt={mt}>
       {label}
     </StyledText>
   );
@@ -36,7 +42,18 @@ const StyledText = styled.Text<{
   size: TextSize;
   weight: TextWeight;
   align: TextAlign;
+  color: TextColor;
+  mt: string;
 }>`
+  margin-top: ${(props) => props.mt}px;
+  color: ${({ color }) => {
+    switch (color) {
+      case "white":
+        return "white";
+      case "black":
+        return "black";
+    }
+  }};
   font-size: ${({ size }) => {
     switch (size) {
       case "12":
