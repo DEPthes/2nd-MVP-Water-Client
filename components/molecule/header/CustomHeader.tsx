@@ -29,15 +29,24 @@ const CustomHeader = ({
   return (
     <SafeAreaViewComponent>
       <HeaderContainer>
-        {showBackButton && (
-          <Pressable onPress={() => navigation.goBack()}>
-            <BackButtonContainer>
-              <BackButton />
-            </BackButtonContainer>
-          </Pressable>
-        )}
-        <MolText label={title} size="17" weight="regular" align="center" />
-
+        <View>
+          {showBackButton && (
+            <Pressable onPress={() => navigation.goBack()}>
+              <BackButtonContainer>
+                <BackButton />
+              </BackButtonContainer>
+            </Pressable>
+          )}
+        </View>
+        <View>
+          <MolText
+            label={title}
+            size="17"
+            weight="regular"
+            align="center"
+            color={"black"}
+          />
+        </View>
         {showBottomLine && <BottomLine />}
       </HeaderContainer>
     </SafeAreaViewComponent>
@@ -46,6 +55,11 @@ const CustomHeader = ({
 
 const HeaderContainer = styled.View`
   padding-top: 8px;
+
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
 `;
 
 const BottomLine = styled.View`
@@ -56,9 +70,6 @@ const BottomLine = styled.View`
   background: #333;
 `;
 
-const BackButtonContainer = styled.View`
-  flex: 1;
-  background-color: rebeccapurple;
-`;
+const BackButtonContainer = styled.View``;
 
 export default CustomHeader;

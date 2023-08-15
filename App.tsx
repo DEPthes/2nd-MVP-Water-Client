@@ -45,7 +45,7 @@ function App() {
           component={CrystalReply}
           options={({ navigation }) => ({
             title: "결정 보관함",
-
+            headerTransparent: true,
             header: () => (
               <CustomHeader
                 navigation={navigation}
@@ -53,6 +53,11 @@ function App() {
                 showBackButton={true}
                 showBottomLine={true}
               />
+            ),
+            tabBarIcon: () => (
+              <ButtonContainer>
+                <ButtonStorage />
+              </ButtonContainer>
             ),
           })}
         />
@@ -81,7 +86,9 @@ const Container = styled.View`
   height: 40px;
   background-color: blue;
 `;
-
+const ButtonContainer = styled.View`
+  margin-top: 25px;
+`;
 export default AppEntryPoint;
 
 // tabBarIcon: () => (
