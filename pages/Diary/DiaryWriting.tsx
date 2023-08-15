@@ -5,16 +5,26 @@ import {
   Platform,
   Pressable,
 } from "react-native";
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import Background from "../../components/atom/background/Background";
 import styled from "styled-components/native";
 import MolText from "../../components/atom/Text/Text";
 import MolButton from "../../components/atom/Button/MolButton";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import Widget from "../../components/organisms/widget/Widget";
 
-export class DiaryWriting extends Component {
-  render() {
-    return (
+export const DiaryWriting = ({ navigation }: { navigation: any }) => {
+  const [onWidget, setOnWidget] = useState<boolean>(false);
+
+  return (
+    <>
+      {onWidget ? (
+        <WidgetContainer>
+          <Widget />
+        </WidgetContainer>
+      ) : (
+        <></>
+      )}
       <Background>
         <Pressable onPress={() => Keyboard.dismiss()}>
           <KeyboardAvoidingView
@@ -54,16 +64,20 @@ export class DiaryWriting extends Component {
                 />
               </DiaryWritingBox>
               <ButtonContainer>
-                <MolButton ColorType="grey" SizeType="big" text="작성취소" />
-                <MolButton ColorType="blue" SizeType="big" text="작성완료" />
+                <Pressable onPress={() => navigation.goBack()}>
+                  <MolButton ColorType="grey" SizeType="big" text="작성취소" />
+                </Pressable>
+                <Pressable onPress={() => setOnWidget(true)}>
+                  <MolButton ColorType="blue" SizeType="big" text="작성완료" />
+                </Pressable>
               </ButtonContainer>
             </Container>
           </KeyboardAvoidingView>
         </Pressable>
       </Background>
-    );
-  }
-}
+    </>
+  );
+};
 
 export default DiaryWriting;
 
@@ -106,4 +120,14 @@ const StyledTextInput = styled.TextInput`
   width: 100%;
   height: 100%;
   margin-top: 15px;
+`;
+
+const WidgetContainer = styled.View`
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  background: rgba(48, 48, 48, 0.7);
+  position: absolute;
+  z-index: 1;
 `;
