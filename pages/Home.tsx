@@ -1,4 +1,4 @@
-import { View, Text, Pressable } from "react-native";
+import { View, Text, Pressable, Image } from "react-native";
 import React from "react";
 import MolText from "../components/atom/Text/Text";
 import styled from "styled-components/native";
@@ -22,6 +22,8 @@ const Home = ({ navigation }: { navigation: any }) => {
             label="화면을 터치하면 일기를 작성할 수 있습니다"
             size="14"
             weight="regular"
+            align="left"
+            color="black"
           />
         </LinearGradient>
       </Container>
