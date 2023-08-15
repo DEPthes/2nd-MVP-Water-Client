@@ -1,9 +1,9 @@
 import { HTMLAttributes } from "react";
 import styled from "styled-components/native";
 
-type TextSize = "12" | "14" | "17" | "22";
+export type TextSize = "12" | "14" | "17" | "22";
 
-type TextWeight = "regular" | "bold";
+export type TextWeight = "regular" | "bold";
 
 type TextAlign = "left" | "center";
 
