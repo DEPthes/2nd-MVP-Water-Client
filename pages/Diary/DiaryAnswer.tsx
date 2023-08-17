@@ -1,11 +1,72 @@
 import { View, Text, ScrollView, Pressable } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Background from "../../components/atom/background/Background";
 import styled from "styled-components/native";
 import MolText from "../../components/atom/Text/Text";
 import MolButton from "../../components/atom/Button/MolButton";
+import axios from "axios";
 
-const DiaryAnswer = ({ navigation }: { navigation: any }) => {
+type ownProps = {
+  navigation: any;
+  route: any;
+};
+
+const DiaryAnswer = (props: ownProps) => {
+  const { navigation, route } = props;
+  const { emotionId, myCrystalCount, inputContent, answerType } = route.params;
+  const [chatResponse, setChatResponse] = useState<string>("");
+
+  useEffect(() => {
+    const apiUrl = `http://3.36.4.36:8080/comment/${answerType}`;
+    const requestBody = {
+      diary: inputContent,
+    };
+
+    // API 요청 헤더 설정
+    const headers = {
+      Authorization:
+        "Bearer we2YMw4txk1Db1iWorLzDnri2amLQQMZ1QRfN8KQCj11XAAAAYoCb4_j",
+      "Content-Type": "application/json",
+    };
+
+    // POST 요청 보내기
+    axios
+      .post(apiUrl, requestBody, { headers })
+      .then((response) => {
+        console.log("API 요청 성공:", response.data);
+        setChatResponse(response.data.data);
+      })
+      .catch((error) => {
+        console.error("API 요청 실패:", error);
+      });
+  }, []);
+
+  const CloseButtonHandler = () => {
+    const apiUrl = `http://3.36.4.36:8080/comment/save`;
+    const requestBody = {
+      comment: chatResponse,
+      emotionId: emotionId,
+      myCrystalCount: myCrystalCount,
+    };
+
+    // API 요청 헤더 설정
+    const headers = {
+      Authorization:
+        "Bearer we2YMw4txk1Db1iWorLzDnri2amLQQMZ1QRfN8KQCj11XAAAAYoCb4_j",
+      "Content-Type": "application/json",
+    };
+
+    // POST 요청 보내기
+    axios
+      .post(apiUrl, requestBody, { headers })
+      .then((response) => {
+        console.log("API 요청 성공:", response.data);
+      })
+      .catch((error) => {
+        console.error("API 요청 실패:", error);
+      });
+    navigation.navigate("Home");
+  };
   return (
     <Background>
       <Container>
@@ -20,42 +81,7 @@ const DiaryAnswer = ({ navigation }: { navigation: any }) => {
         <DiaryWritingBox>
           <ScrollViewContainer>
             <MolText
-              label="정말 어이없는 상황이었겠네요. 친구가 약속을 어기고 사과도 없이 지각하다니 정말 참을 수 없는 일이었을 겁니다. 이런 상황에서 분위기를 망치지 않으려고 노력하셨다는 것은 당신의 성숙한 모습을 보여주는 것 같아요.
-
-            먼저, 이런 상황에서 당신의 느낌과 감정은 정말 자연스러운 것이에요. 화난 마음을 누르고 숨기지 말고, 이런 상황에서 화를 내는 것은 전혀 잘못된 일이 아닙니다. 그러나 분위기를 흐리게 하지 않으려는 의도가 있었다면, 그건 고마운 점입니다.
-            
-            이런 상황을 마주할 때, 다음과 같은 방법들을 고려해볼 수 있습니다:
-            헤어지고 집에 왔다면, 한동안은 조용한 시간을 가져보세요. 당신의 감정을 정리하고 차분하게 생각해 볼 수 있는 시간을 가지는 것이 좋습니다.정말 어이없는 상황이었겠네요. 친구가 약속을 어기고 사과도 없이 지각하다니 정말 참을 수 없는 일이었을 겁니다. 이런 상황에서 분위기를 망치지 않으려고 노력하셨다는 것은 당신의 성숙한 모습을 보여주는 것 같아요.
-
-            먼저, 이런 상황에서 당신의 느낌과 감정은 정말 자연스러운 것이에요. 화난 마음을 누르고 숨기지 말고, 이런 상황에서 화를 내는 것은 전혀 잘못된 일이 아닙니다. 그러나 분위기를 흐리게 하지 않으려는 의도가 있었다면, 그건 고마운 점입니다.
-            
-            이런 상황을 마주할 때, 다음과 같은 방법들을 고려해볼 수 있습니다:
-            헤어지고 집에 왔다면, 한동안은 조용한 시간을 가져보세요. 당신의 감정을 정리하고 차분하게 생각해 볼 수 있는 시간을 가지는 것이 좋습니다.정말 어이없는 상황이었겠네요. 친구가 약속을 어기고 사과도 없이 지각하다니 정말 참을 수 없는 일이었을 겁니다. 이런 상황에서 분위기를 망치지 않으려고 노력하셨다는 것은 당신의 성숙한 모습을 보여주는 것 같아요.
-
-            먼저, 이런 상황에서 당신의 느낌과 감정은 정말 자연스러운 것이에요. 화난 마음을 누르고 숨기지 말고, 이런 상황에서 화를 내는 것은 전혀 잘못된 일이 아닙니다. 그러나 분위기를 흐리게 하지 않으려는 의도가 있었다면, 그건 고마운 점입니다.
-            
-            이런 상황을 마주할 때, 다음과 같은 방법들을 고려해볼 수 있습니다:
-            헤어지고 집에 왔다면, 한동안은 조용한 시간을 가져보세요. 당신의 감정을 정리하고 차분하게 생각해 볼 수 있는 시간을 가지는 것이 좋습니다.정말 어이없는 상황이었겠네요. 친구가 약속을 어기고 사과도 없이 지각하다니 정말 참을 수 없는 일이었을 겁니다. 이런 상황에서 분위기를 망치지 않으려고 노력하셨다는 것은 당신의 성숙한 모습을 보여주는 것 같아요.
-
-            먼저, 이런 상황에서 당신의 느낌과 감정은 정말 자연스러운 것이에요. 화난 마음을 누르고 숨기지 말고, 이런 상황에서 화를 내는 것은 전혀 잘못된 일이 아닙니다. 그러나 분위기를 흐리게 하지 않으려는 의도가 있었다면, 그건 고마운 점입니다.
-            
-            이런 상황을 마주할 때, 다음과 같은 방법들을 고려해볼 수 있습니다:
-            헤어지고 집에 왔다면, 한동안은 조용한 시간을 가져보세요. 당신의 감정을 정리하고 차분하게 생각해 볼 수 있는 시간을 가지는 것이 좋습니다.정말 어이없는 상황이었겠네요. 친구가 약속을 어기고 사과도 없이 지각하다니 정말 참을 수 없는 일이었을 겁니다. 이런 상황에서 분위기를 망치지 않으려고 노력하셨다는 것은 당신의 성숙한 모습을 보여주는 것 같아요.
-
-            먼저, 이런 상황에서 당신의 느낌과 감정은 정말 자연스러운 것이에요. 화난 마음을 누르고 숨기지 말고, 이런 상황에서 화를 내는 것은 전혀 잘못된 일이 아닙니다. 그러나 분위기를 흐리게 하지 않으려는 의도가 있었다면, 그건 고마운 점입니다.
-            
-            이런 상황을 마주할 때, 다음과 같은 방법들을 고려해볼 수 있습니다:
-            헤어지고 집에 왔다면, 한동안은 조용한 시간을 가져보세요. 당신의 감정을 정리하고 차분하게 생각해 볼 수 있는 시간을 가지는 것이 좋습니다.정말 어이없는 상황이었겠네요. 친구가 약속을 어기고 사과도 없이 지각하다니 정말 참을 수 없는 일이었을 겁니다. 이런 상황에서 분위기를 망치지 않으려고 노력하셨다는 것은 당신의 성숙한 모습을 보여주는 것 같아요.
-
-            먼저, 이런 상황에서 당신의 느낌과 감정은 정말 자연스러운 것이에요. 화난 마음을 누르고 숨기지 말고, 이런 상황에서 화를 내는 것은 전혀 잘못된 일이 아닙니다. 그러나 분위기를 흐리게 하지 않으려는 의도가 있었다면, 그건 고마운 점입니다.
-            
-            이런 상황을 마주할 때, 다음과 같은 방법들을 고려해볼 수 있습니다:
-            헤어지고 집에 왔다면, 한동안은 조용한 시간을 가져보세요. 당신의 감정을 정리하고 차분하게 생각해 볼 수 있는 시간을 가지는 것이 좋습니다.정말 어이없는 상황이었겠네요. 친구가 약속을 어기고 사과도 없이 지각하다니 정말 참을 수 없는 일이었을 겁니다. 이런 상황에서 분위기를 망치지 않으려고 노력하셨다는 것은 당신의 성숙한 모습을 보여주는 것 같아요.
-
-            먼저, 이런 상황에서 당신의 느낌과 감정은 정말 자연스러운 것이에요. 화난 마음을 누르고 숨기지 말고, 이런 상황에서 화를 내는 것은 전혀 잘못된 일이 아닙니다. 그러나 분위기를 흐리게 하지 않으려는 의도가 있었다면, 그건 고마운 점입니다.
-            
-            이런 상황을 마주할 때, 다음과 같은 방법들을 고려해볼 수 있습니다:
-            헤어지고 집에 왔다면, 한동안은 조용한 시간을 가져보세요. 당신의 감정을 정리하고 차분하게 생각해 볼 수 있는 시간을 가지는 것이 좋습니다."
+              label={chatResponse}
               size="17"
               weight="regular"
               align="left"
@@ -64,7 +90,7 @@ const DiaryAnswer = ({ navigation }: { navigation: any }) => {
           </ScrollViewContainer>
         </DiaryWritingBox>
         <CloseButtonContainer>
-          <Pressable onPress={() => navigation.navigate("Home")}>
+          <Pressable onPress={() => CloseButtonHandler()}>
             <MolButton ColorType="darkGrey" SizeType="small" text="닫기" />
           </Pressable>
         </CloseButtonContainer>
