@@ -33,8 +33,7 @@ export const DiaryWriting = ({ navigation }: { navigation: any }) => {
 
     // API 요청 헤더 설정
     const headers = {
-      Authorization:
-        "Bearer we2YMw4txk1Db1iWorLzDnri2amLQQMZ1QRfN8KQCj11XAAAAYoCb4_j",
+      Authorization: "",
       "Content-Type": "application/json",
     };
 
