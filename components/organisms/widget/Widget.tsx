@@ -1,9 +1,38 @@
 import { Image, Pressable, Text, View } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components/native";
 import MolText from "../../atom/Text/Text";
 
-const Widget = ({ navigate }: { navigate: any }) => {
+type ownProps = {
+  navigate: any;
+  emotionId: number;
+  myCrystalCount: number;
+  inputContent: string;
+};
+
+const Widget = (props: ownProps) => {
+  const { navigate, emotionId, myCrystalCount, inputContent } = props;
+
+  let answerType = "";
+
+  const comfortButtonHandler = () => {
+    answerType = "comfortcomplete";
+    navigationHandler();
+  };
+  const mysideButtonHandler = () => {
+    answerType = "mysidecomplete";
+    navigationHandler();
+  };
+
+  const navigationHandler = () => {
+    console.log(answerType);
+    navigate("DiaryAnswer", {
+      emotionId,
+      myCrystalCount,
+      inputContent,
+      answerType,
+    });
+  };
   return (
     <Container>
       <MolText
@@ -22,7 +51,7 @@ const Widget = ({ navigate }: { navigate: any }) => {
         mt="2"
       />
       <ButtonContainer>
-        <Pressable onPress={() => navigate("DiaryAnswer")}>
+        <Pressable onPress={() => mysideButtonHandler()}>
           <ButtonTextWrapper>
             <Image
               source={require("../../../assets/png/resultImg1.png")}
@@ -41,7 +70,7 @@ const Widget = ({ navigate }: { navigate: any }) => {
             />
           </ButtonTextWrapper>
         </Pressable>
-        <Pressable onPress={() => navigate("DiaryAnswer")}>
+        <Pressable onPress={() => comfortButtonHandler()}>
           <ButtonTextWrapper>
             <Image
               source={require("../../../assets/png/resultImg2.png")}

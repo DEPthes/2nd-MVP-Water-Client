@@ -10,17 +10,57 @@ import Background from "../../components/atom/background/Background";
 import styled from "styled-components/native";
 import MolText from "../../components/atom/Text/Text";
 import MolButton from "../../components/atom/Button/MolButton";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import Widget from "../../components/organisms/widget/Widget";
+import axios from "axios";
 
 export const DiaryWriting = ({ navigation }: { navigation: any }) => {
   const [onWidget, setOnWidget] = useState<boolean>(false);
+
+  const [inputContent, setInputContent] = useState("");
+
+  const [emotionId, setEmotionId] = useState(0);
+
+  const [myCrystalCount, setMyCrystalCount] = useState(0);
+
+  const CompleteWritingHandler = () => {
+    console.log("일기 작성을 완료했습니다.");
+    console.log(inputContent);
+    setOnWidget(true);
+    const apiUrl = "http://3.36.4.36:8080/diary";
+    const requestBody = {
+      diary: inputContent,
+    };
+
+    // API 요청 헤더 설정
+    const headers = {
+      Authorization: "",
+      "Content-Type": "application/json",
+    };
+
+    // POST 요청 보내기
+    axios
+      .post(apiUrl, requestBody, { headers })
+      .then((response) => {
+        setEmotionId(response.data.data.emotionId);
+        setMyCrystalCount(response.data.data.myCrystalCount);
+        console.log("API 요청 성공:", response.data.data);
+      })
+      .catch((error) => {
+        console.error("API 요청 실패:", error);
+        // 에러 처리를 수행하세요.
+      });
+  };
 
   return (
     <>
       {onWidget ? (
         <WidgetContainer>
-          <Widget navigate={navigation.navigate} />
+          <Widget
+            navigate={navigation.navigate}
+            emotionId={emotionId}
+            myCrystalCount={myCrystalCount}
+            inputContent={inputContent}
+          />
         </WidgetContainer>
       ) : (
         <></>
@@ -58,16 +98,18 @@ export const DiaryWriting = ({ navigation }: { navigation: any }) => {
                   align="left"
                   color="black"
                 />
-                <StyledTextInput
-                  multiline={true} // 여러 줄 입력 활성화
+                <StyledTextInput // Inout
+                  multiline={true}
                   placeholder="터치하여 일기 쓰기"
+                  value={inputContent} // Set the value of the input
+                  onChangeText={(text: string) => setInputContent(text)} // Update the inputContetn state
                 />
               </DiaryWritingBox>
               <ButtonContainer>
                 <Pressable onPress={() => navigation.goBack()}>
                   <MolButton ColorType="grey" SizeType="big" text="작성취소" />
                 </Pressable>
-                <Pressable onPress={() => setOnWidget(true)}>
+                <Pressable onPress={() => CompleteWritingHandler()}>
                   <MolButton ColorType="blue" SizeType="big" text="작성완료" />
                 </Pressable>
               </ButtonContainer>
