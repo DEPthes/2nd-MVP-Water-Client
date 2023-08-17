@@ -3,10 +3,11 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import ButtonMyPage from "../assets/svg/ButtonMyPage";
 import ButtonStorage from "../assets/svg/ButtonStorage";
-import Storage from "./Storage";
+import Storage from "./Storage/Storage";
 import Home from "./Home";
 import MyPage from "./MyPage";
 import styled from "styled-components/native";
+import CustomHeader from "../components/molecule/header/CustomHeader";
 
 const Main = () => {
   const Tab = createBottomTabNavigator();
@@ -27,10 +28,18 @@ const Main = () => {
         component={Storage}
         options={{
           title: "결정 보관함",
+          header: () => (
+            <CustomHeader
+              navigation={""}
+              title="결정 보관함"
+              showBackButton={false}
+              showBottomLine={true}
+            />
+          ),
           headerStyle: {
             backgroundColor: "transparent",
             borderBottomWidth: 1,
-            borderBottomColor: "gray",
+            borderBottomColor: "transparent",
           },
           tabBarIcon: () => (
             <ButtonContainer>
@@ -39,6 +48,7 @@ const Main = () => {
           ),
         }}
       />
+
       <Tab.Screen
         name="Home"
         component={Home}
@@ -81,4 +91,10 @@ export default Main;
 
 const ButtonContainer = styled.View`
   margin-top: 25px;
+`;
+const TabTitle = styled.Text`
+  color: #000;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 24px;
 `;

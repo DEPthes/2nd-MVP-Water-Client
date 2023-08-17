@@ -5,13 +5,16 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "./pages/Home";
 import MyPage from "./pages/MyPage";
-import Storage from "./pages/Storage";
+import Storage from "./pages/Storage/Storage";
 import ButtonStorage from "./assets/svg/ButtonStorage";
 import ButtonMyPage from "./assets/svg/ButtonMyPage";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Main from "./pages/Main";
 import DiaryWriting from "./pages/Diary/DiaryWriting";
 import BackButton from "./assets/svg/BackButton";
+import CrystalReply from "./pages/Storage/CrystalReply";
+import React from "react";
+import CustomHeader from "./components/molecule/header/CustomHeader";
 import DiaryAnswer from "./pages/Diary/DiaryAnswer";
 
 function App() {
@@ -47,6 +50,28 @@ function App() {
             headerLeft: () => <></>,
           })}
         />
+
+        <Tab.Screen
+          name="CrystalReply"
+          component={CrystalReply}
+          options={({ navigation }) => ({
+            title: "결정 보관함",
+            headerTransparent: true,
+            header: () => (
+              <CustomHeader
+                navigation={navigation}
+                title="결정 보관함"
+                showBackButton={true}
+                showBottomLine={true}
+              />
+            ),
+            tabBarIcon: () => (
+              <ButtonContainer>
+                <ButtonStorage />
+              </ButtonContainer>
+            ),
+          })}
+        />
       </Tab.Navigator>
     </NavigationContainer>
   );
@@ -72,7 +97,9 @@ const Container = styled.View`
   height: 40px;
   background-color: blue;
 `;
-
+const ButtonContainer = styled.View`
+  margin-top: 25px;
+`;
 export default AppEntryPoint;
 
 // tabBarIcon: () => (
@@ -91,12 +118,3 @@ export default AppEntryPoint;
 //     />
 //   </View>
 // ),
-
-const CutomHeader = styled.View`
-  width: "100%";
-  height: "100%";
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 2px solid red;
-`;
