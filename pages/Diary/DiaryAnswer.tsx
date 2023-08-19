@@ -24,7 +24,8 @@ const DiaryAnswer = (props: ownProps) => {
 
     // API 요청 헤더 설정
     const headers = {
-      Authorization: "",
+      Authorization:
+        "Bearer h6ftIf5Eq-s1Ci9awfce4AgweBwU2AWhLlLvGE07Cj1zmwAAAYoNjfBe",
       "Content-Type": "application/json",
     };
 
@@ -51,7 +52,7 @@ const DiaryAnswer = (props: ownProps) => {
     // API 요청 헤더 설정
     const headers = {
       Authorization:
-        "Bearer we2YMw4txk1Db1iWorLzDnri2amLQQMZ1QRfN8KQCj11XAAAAYoCb4_j",
+        "Bearer h6ftIf5Eq-s1Ci9awfce4AgweBwU2AWhLlLvGE07Cj1zmwAAAYoNjfBe",
       "Content-Type": "application/json",
     };
 

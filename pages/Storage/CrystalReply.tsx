@@ -1,10 +1,12 @@
 import { View, Text } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Background from "../../components/atom/background/Background";
 import styled from "styled-components/native";
 import CrystalReplyBox from "../../components/molecule/Storage/CrystalReplyBox";
+import axios from "axios";
 
 const CrystalReply = () => {
+
   return (
     <Background>
       <Container>

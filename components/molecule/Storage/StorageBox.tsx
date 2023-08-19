@@ -1,13 +1,20 @@
 import React from "react";
 import styled from "styled-components/native";
 import { Image, TouchableOpacity } from "react-native";
+import crystal from "../../../types/crystal";
 
 interface BoxProps {
   image: any;
   onPress?: () => void; // Add onPress prop
 }
 
-const StorageBox = ({ image, onPress }: BoxProps) => {
+type ownProps = {
+  image: any;
+  onPress?: () => void;
+} & crystal;
+
+const StorageBox = (props: ownProps) => {
+  const { image, onPress, crystalId, red, green, blue } = props;
   return (
     <TouchableBoxContainer onPress={onPress}>
       <BoxImage source={image} />

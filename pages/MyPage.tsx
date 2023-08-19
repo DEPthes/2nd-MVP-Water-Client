@@ -1,12 +1,33 @@
 import { View, Text, Image } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import Background from "../components/atom/background/Background";
 import MolText from "../components/atom/Text/Text";
 import styled from "styled-components/native";
 import InformationBanner from "../components/molecules/MyPage/InformationBanner/InformationBanner";
 import MolButton from "../components/atom/Button/MolButton";
+import axios from "axios";
 
 const MyPage = () => {
+  useEffect(() => {
+    const apiUrl = `http://3.36.4.36:8080/mypage`;
+
+    // API 요청 헤더 설정
+    const headers = {
+      Authorization:
+        "Bearer h6ftIf5Eq-s1Ci9awfce4AgweBwU2AWhLlLvGE07Cj1zmwAAAYoNjfBe",
+      "Content-Type": "application/json",
+    };
+
+    // POST 요청 보내기
+    axios
+      .get(apiUrl, { headers })
+      .then((response) => {
+        console.log("API 요청 성공:", response.data);
+      })
+      .catch((error) => {
+        console.error("API 요청 실패:", error);
+      });
+  }, []);
   return (
     <Background>
       <Container>
