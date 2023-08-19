@@ -1,8 +1,8 @@
-type ctystal = {
+type crystal = {
   crystalId: number;
   red: number;
   green: number;
   blue: number;
 };
 
-export default ctystal;
+export default crystal;

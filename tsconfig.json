@@ -5,7 +5,9 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./*"],
-      "@const/*": ["const/*"]
+      "@types/*": ["./types/*"],
+      "@components/*": ["./components/*"],
+      "@assets/*": ["./assets/*"]
     }
   }
 }
