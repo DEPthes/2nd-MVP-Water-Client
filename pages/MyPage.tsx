@@ -58,11 +58,11 @@ const MyPage = () => {
       const formData = new FormData();
 
       // 이미지 파일 추가
-      formData.append("file", {
-        uri: result.assets[0].uri,
-        name: "image",
-        type: "image", // 이미지 MIME 타입
-      });
+      // formData.append("file", {
+      //   uri: result.assets[0].uri,
+      //   name: "image",
+      //   type: "image", // 이미지 MIME 타입
+      // });
       const apiUrl = `http://3.36.4.36:8080/mypage/image`;
 
       const requestBody = {
@@ -70,7 +70,7 @@ const MyPage = () => {
       };
       const headers = {
         Authorization:
-          "Bearer DqQPiKi5Yv4cStJ6ETsM9FFfyol7TzXyAJbHr2IlCj102gAAAYoQjVs8",
+          "Bearer KvOxVva9xKjsl2mZ44aLt8Wa_bJCvhWaBDQcqEVfCiolTgAAAYoSco7Z",
         "Content-Type": "application/json",
       };
 
@@ -92,7 +92,7 @@ const MyPage = () => {
     const requestBody = {};
     const headers = {
       Authorization:
-        "Bearer DqQPiKi5Yv4cStJ6ETsM9FFfyol7TzXyAJbHr2IlCj102gAAAYoQjVs8",
+        "Bearer KvOxVva9xKjsl2mZ44aLt8Wa_bJCvhWaBDQcqEVfCiolTgAAAYoSco7Z",
       "Content-Type": "application/json",
     };
 
@@ -116,7 +116,7 @@ const MyPage = () => {
       };
       const headers = {
         Authorization:
-          "Bearer DqQPiKi5Yv4cStJ6ETsM9FFfyol7TzXyAJbHr2IlCj102gAAAYoQjVs8",
+          "Bearer KvOxVva9xKjsl2mZ44aLt8Wa_bJCvhWaBDQcqEVfCiolTgAAAYoSco7Z",
         "Content-Type": "application/json",
       };
 
@@ -144,10 +144,10 @@ const MyPage = () => {
   useEffect(() => {
     const apiUrl = `http://3.36.4.36:8080/mypage/`;
 
-    // API 요청 헤더 설정
+    // API 요청 헤더 설정s
     const headers = {
       Authorization:
-        "Bearer DqQPiKi5Yv4cStJ6ETsM9FFfyol7TzXyAJbHr2IlCj102gAAAYoQjVs8",
+        "Bearer KvOxVva9xKjsl2mZ44aLt8Wa_bJCvhWaBDQcqEVfCiolTgAAAYoSco7Z",
       "Content-Type": "application/json",
     };
 

@@ -23,7 +23,7 @@ const Storage = ({ navigation }: StorageProps) => {
     // API 요청 헤더 설정
     const headers = {
       Authorization:
-        "Bearer h6ftIf5Eq-s1Ci9awfce4AgweBwU2AWhLlLvGE07Cj1zmwAAAYoNjfBe",
+        "Bearer KvOxVva9xKjsl2mZ44aLt8Wa_bJCvhWaBDQcqEVfCiolTgAAAYoSco7Z",
       "Content-Type": "application/json",
     };
 
