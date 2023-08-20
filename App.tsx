@@ -16,63 +16,103 @@ import CrystalReply from "./pages/Storage/CrystalReply";
 import React from "react";
 import CustomHeader from "./components/molecule/header/CustomHeader";
 import DiaryAnswer from "./pages/Diary/DiaryAnswer";
+import Login from "./pages/Join/Login";
+import { AuthProvider } from "./context/AuthContext";
+
+import SplashMain from "./pages/Splash/SplashMain";
+import ProfileSetting from "./pages/Join/ProfileSetting";
 
 function App() {
   const Tab = createNativeStackNavigator();
   return (
     <NavigationContainer>
-      <Tab.Navigator initialRouteName="Main">
-        <Tab.Screen
-          name="Main"
-          component={Main}
-          options={{ headerShown: false }}
-        />
-        <Tab.Screen
-          name="DiaryWriting"
-          component={DiaryWriting}
-          options={({ navigation }) => ({
-            title: "일기 쓰기",
-            headerTransparent: true, // Make header transparent
+      <AuthProvider>
+        <Tab.Navigator initialRouteName="Login">
+          <Tab.Screen
+            name="Main"
+            component={Main}
+            options={{ headerShown: false }}
+          />
+          <Tab.Screen
+            name="DiaryWriting"
+            component={DiaryWriting}
+            options={({ navigation }) => ({
+              title: "일기 쓰기",
+              headerTransparent: true, // Make header transparent
 
-            headerLeft: () => (
-              <Pressable onPress={() => navigation.goBack()}>
-                <BackButton />
-              </Pressable>
-            ),
-          })}
-        />
-        <Tab.Screen
-          name="DiaryAnswer"
-          component={DiaryAnswer}
-          options={() => ({
-            title: "일기 쓰기",
-            headerTransparent: true, // Make header transparent
-            headerLeft: () => <></>,
-          })}
-        />
+              headerLeft: () => (
+                <Pressable onPress={() => navigation.goBack()}>
+                  <BackButton />
+                </Pressable>
+              ),
+            })}
+          />
+          <Tab.Screen
+            name="DiaryAnswer"
+            component={DiaryAnswer}
+            options={() => ({
+              title: "일기 쓰기",
+              headerTransparent: true, // Make header transparent
+              headerLeft: () => <></>,
+            })}
+          />
 
-        <Tab.Screen
-          name="CrystalReply"
-          component={CrystalReply}
-          options={({ navigation }) => ({
-            title: "결정 보관함",
-            headerTransparent: true,
-            header: () => (
-              <CustomHeader
-                navigation={navigation}
-                title="결정 보관함"
-                showBackButton={true}
-                showBottomLine={true}
-              />
-            ),
-            tabBarIcon: () => (
-              <ButtonContainer>
-                <ButtonStorage />
-              </ButtonContainer>
-            ),
-          })}
-        />
-      </Tab.Navigator>
+          <Tab.Screen
+            name="CrystalReply"
+            component={CrystalReply}
+            options={({ navigation }) => ({
+              title: "결정 보관함",
+              headerTransparent: true,
+              header: () => (
+                <CustomHeader
+                  navigation={navigation}
+                  title="결정 보관함"
+                  showBackButton={true}
+                  showBottomLine={true}
+                />
+              ),
+              tabBarIcon: () => (
+                <ButtonContainer>
+                  <ButtonStorage />
+                </ButtonContainer>
+              ),
+            })}
+          />
+
+          <Tab.Screen
+            name="Login"
+            component={Login}
+            options={() => ({
+              headerTransparent: true,
+              headerTitle: "",
+            })}
+          />
+          <Tab.Screen
+            name="ProfileSetting"
+            component={ProfileSetting}
+            options={({ navigation }) => ({
+              headerTransparent: true,
+              headerTitle: "",
+              header: () => (
+                <CustomHeader
+                  navigation={navigation}
+                  title="프로필 설정"
+                  showBackButton={true}
+                  showBottomLine={true}
+                />
+              ),
+            })}
+          />
+          <Tab.Screen
+            name="SplashMain"
+            component={SplashMain}
+            options={() => ({
+              headerTransparent: true,
+              headerTitle: "",
+            })}
+          />
+        </Tab.Navigator>
+      </AuthProvider>
     </NavigationContainer>
   );
 }
