@@ -1,15 +1,14 @@
 import { View, Text } from "react-native";
 import React from "react";
 import styled from "styled-components/native";
-import MolText from "../../../atom/Text/Text";
-
+import MolText from "@/components/atom/Text/Text";
 const InformationBanner = ({
   title,
   value,
   unit,
 }: {
   title: string;
-  value: string;
+  value: number;
   unit: string;
 }) => {
   return (
