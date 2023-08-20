@@ -12,7 +12,7 @@ type TextColor = "white" | "black";
 type TextProps = HTMLAttributes<HTMLParagraphElement> & {
   size?: TextSize;
   weight?: TextWeight;
-  label: string;
+  label: string | number;
   align: TextAlign;
   color: TextColor;
   mt?: string;
