@@ -4,7 +4,7 @@ import styled from "styled-components/native";
 import MolText from "../../atom/Text/Text";
 import { format } from "date-fns"; // date-fns 라이브러리 사용
 import { useNavigation } from "@react-navigation/native";
-import { AppNavProps } from "./ParamList";
+import { AppNavProps } from "./StorageParamList";
 
 interface ReplyBoxProps {
   date: string;

@@ -9,9 +9,15 @@ import MyPage from "./MyPage";
 import styled from "styled-components/native";
 import CustomHeader from "../components/molecule/header/CustomHeader";
 import Login from "./Join/login";
+import FocusedButtonStorage from "@/assets/svg/FocusedButtonStorage";
+import FocusedButtonMyPage from "@/assets/svg/FocusedButtonMyPage";
 
 const Main = () => {
   const Tab = createBottomTabNavigator();
+  const isTabFocused = (state: any, routeName: string) => {
+    const route = state.routes.find((r: any) => r.name === routeName);
+    return route ? route.state?.index === 0 : false;
+  };
   return (
     <Tab.Navigator
       screenOptions={{
@@ -42,9 +48,9 @@ const Main = () => {
             borderBottomWidth: 1,
             borderBottomColor: "transparent",
           },
-          tabBarIcon: () => (
+          tabBarIcon: ({ focused }) => (
             <ButtonContainer>
-              <ButtonStorage />
+              {focused ? <FocusedButtonStorage /> : <ButtonStorage />}
             </ButtonContainer>
           ),
         }}
@@ -64,7 +70,7 @@ const Main = () => {
               style={{
                 width: 66,
                 height: 80,
-                marginBottom: 4,
+                marginBottom: 60,
                 objectFit: "contain",
               }}
             />
@@ -77,9 +83,9 @@ const Main = () => {
         options={{
           title: "",
           headerTransparent: true,
-          tabBarIcon: () => (
+          tabBarIcon: ({ focused }) => (
             <ButtonContainer>
-              <ButtonMyPage />
+              {focused ? <FocusedButtonMyPage /> : <ButtonMyPage />}
             </ButtonContainer>
           ),
         }}
@@ -90,9 +96,7 @@ const Main = () => {
 
 export default Main;
 
-const ButtonContainer = styled.View`
-  margin-top: 25px;
-`;
+const ButtonContainer = styled.View``;
 const TabTitle = styled.Text`
   color: #000;
   font-size: 17px;

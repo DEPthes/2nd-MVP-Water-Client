@@ -1,11 +1,17 @@
-import { Button, Image, Pressable, StyleSheet, Text, View } from "react-native";
+import {
+  Button,
+  Image,
+  LogBox,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+  YellowBox,
+} from "react-native";
 import Constants from "expo-constants";
 import styled from "styled-components/native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Home from "./pages/Home";
-import MyPage from "./pages/MyPage";
-import Storage from "./pages/Storage/Storage";
 import ButtonStorage from "./assets/svg/ButtonStorage";
 import ButtonMyPage from "./assets/svg/ButtonMyPage";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -23,7 +29,11 @@ import SplashMain from "./pages/Splash/SplashMain";
 import ProfileSetting from "./pages/Join/ProfileSetting";
 import ReplyBoxDetail from "./pages/Storage/ReplyBoxDetail";
 
+interface Warning {
+  message: string;
+}
 function App() {
+  LogBox.ignoreAllLogs();
   const Tab = createNativeStackNavigator();
   return (
     <NavigationContainer>

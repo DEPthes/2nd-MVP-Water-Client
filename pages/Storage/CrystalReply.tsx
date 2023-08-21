@@ -25,14 +25,10 @@ const CrystalReply = () => {
 
   useEffect(() => {
     const apiUrl = `http://3.36.4.36:8080/crystal/${crystalId}`;
-
-    // API 요청 헤더 설정
     const headers = {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     };
-
-    // POST 요청 보내기
     axios
       .get(apiUrl, { headers })
       .then((response) => {

@@ -1,7 +1,7 @@
 import { View, Text, ScrollView, TouchableOpacity } from "react-native";
 import React from "react";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
-import { AppNavProps } from "@/components/molecule/Storage/ParamList";
+import { AppNavProps } from "@/components/molecule/Storage/StorageParamList";
 import Background from "@/components/atom/background/Background";
 import styled from "styled-components/native";
 import MolText from "@/components/atom/Text/Text";
@@ -62,6 +62,7 @@ export default ReplyBoxDetail;
 
 const Container = styled.View`
   margin-top: 100px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -78,8 +79,8 @@ const DateContainer = styled.Text`
 `;
 
 const ContentContainer = styled.View`
-  width: fit-content;
-  height: fit-content;
+  width: 348px;
+  height: 100%;
   background: #fff;
   overflow: hidden;
   padding: 18px 24px;
