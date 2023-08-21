@@ -49,7 +49,14 @@ const Storage = ({ navigation }: StorageProps) => {
         green={item.green}
         blue={item.blue}
         image={test}
-        onPress={() => navigation.navigate("CrystalReply")}
+        onPress={() =>
+          navigation.navigate("CrystalReply", {
+            crystalId: item.crystalId,
+            red: item.red,
+            green: item.green,
+            blue: item.blue,
+          })
+        }
       />
     </GridItem>
   );

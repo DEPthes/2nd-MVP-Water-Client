@@ -21,6 +21,7 @@ import { AuthProvider } from "./context/AuthContext";
 
 import SplashMain from "./pages/Splash/SplashMain";
 import ProfileSetting from "./pages/Join/ProfileSetting";
+import ReplyBoxDetail from "./pages/Storage/ReplyBoxDetail";
 
 function App() {
   const Tab = createNativeStackNavigator();
@@ -79,6 +80,27 @@ function App() {
             })}
           />
 
+          <Tab.Screen
+            name="ReplyBoxDetail"
+            component={ReplyBoxDetail}
+            options={({ navigation }) => ({
+              title: "결정 보관함",
+              headerTransparent: true,
+              header: () => (
+                <CustomHeader
+                  navigation={navigation}
+                  title="결정 보관함"
+                  showBackButton={true}
+                  showBottomLine={true}
+                />
+              ),
+              tabBarIcon: () => (
+                <ButtonContainer>
+                  <ButtonStorage />
+                </ButtonContainer>
+              ),
+            })}
+          />
           <Tab.Screen
             name="Login"
             component={Login}
