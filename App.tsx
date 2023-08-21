@@ -101,6 +101,7 @@ function App() {
                   showBottomLine={true}
                 />
               ),
+              screenNavigation: navigation,
             })}
           />
           <Tab.Screen

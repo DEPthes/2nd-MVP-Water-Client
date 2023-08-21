@@ -2,6 +2,14 @@
   "expo": {
     "name": "AwesomeStorybook",
     "slug": "AwesomeStorybook",
-    "assets": ["./assets/png"]
+    "assets": ["./assets/png"],
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "앨범 접근을 허용하시겠습니까?"
+        }
+      ]
+    ]
   }
 }

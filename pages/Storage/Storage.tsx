@@ -7,6 +7,7 @@ import test from "../../assets/png/crystal.png";
 import { NavigationProp } from "@react-navigation/native"; // Import NavigationProp
 import axios from "axios";
 import crystal from "@/types/crystal";
+import { useAuth } from "@/context/AuthContext";
 
 interface StorageProps {
   navigation: NavigationProp<any>;
@@ -15,6 +16,7 @@ interface StorageProps {
 const numColumns = 4;
 
 const Storage = ({ navigation }: StorageProps) => {
+  const { token } = useAuth();
   const [crystalData, setCrystalData] = useState<crystal[]>([]);
 
   useEffect(() => {
@@ -22,8 +24,7 @@ const Storage = ({ navigation }: StorageProps) => {
 
     // API 요청 헤더 설정
     const headers = {
-      Authorization:
-        "Bearer h6ftIf5Eq-s1Ci9awfce4AgweBwU2AWhLlLvGE07Cj1zmwAAAYoNjfBe",
+      Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     };
 
@@ -31,11 +32,11 @@ const Storage = ({ navigation }: StorageProps) => {
     axios
       .get(apiUrl, { headers })
       .then((response) => {
-        console.log("API 요청 성공:", response.data.data);
+        console.log("crystal/all API 요청 성공:", response.data.data);
         setCrystalData(response.data.data);
       })
       .catch((error) => {
-        console.error("API 요청 실패:", error);
+        console.log("crystal/all API 요청 실패:", error);
       });
   }, []);
 
@@ -96,5 +97,4 @@ const GridItem = styled.View`
 
 const ItemText = styled.Text`
   font-size: 18px;
-  /* 원하는 텍스트 스타일을 설정하세요 */
 `;

@@ -18,7 +18,7 @@ interface AuthContextType {
   setToken: (value: string) => void;
   login: () => void;
   logout: () => void;
-  updateUserProfile: (selectedImage: string) => void;
+  updateUserProfile: (image: string) => void;
   updateUserNickname: (newNickname: string) => void;
   updateUserProfileDefault: (defaultImage: string) => void;
 }
@@ -69,53 +69,35 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     login();
   }, []);
 
-  const updateUserProfile = (selectedImage: string | null) => {
+  const updateUserProfile = async (image: string | null) => {
     const apiUrl = createApiUrl("/mypage/image");
 
-    const formData = new FormData();
-    // formData.append("newNickname", newNickname);
+    if (image) {
+      try {
+        // 이미지를 Blob으로 변환
+        const fetchResponse = await fetch(image);
+        const blob = await fetchResponse.blob();
 
-    if (selectedImage) {
-      const imageUriParts = selectedImage.split(".");
-      const imageExtension = imageUriParts[imageUriParts.length - 1];
+        // FormData 생성 및 이미지 추가
+        const formData = new FormData();
+        formData.append("image", blob);
 
-      // 이미지를 Blob으로 변환
-      fetch(selectedImage)
-        .then((response) => response.blob())
-        .then((blob) => {
-          formData.append("selectedImage", blob, `profile.${imageExtension}`);
-
-          // FormData를 사용하여 업데이트 요청 보내기
-          axios
-            .patch(apiUrl, formData, {
-              headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json",
-              },
-            })
-            .then((response) => {
-              console.log("profile Img update 성공");
-            })
-            .catch((error) => {
-              console.log("updateUserProfile API 요청 실패:", error);
-            });
+        // FormData를 사용하여 업데이트 요청 보내기
+        const axiosResponse = await axios.patch(apiUrl, formData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
         });
+
+        console.log("profile Img update 성공");
+        // 업데이트 성공 시 필요한 작업 수행
+      } catch (error) {
+        console.log("updateUserProfile API 요청 실패:", error);
+      }
     } else {
       // 이미지가 없는 경우에는 그냥 FormData만 사용하여 업데이트 요청 보내기
-      //   axios
-      //     .patch(apiUrl, formData, {
-      //       headers: {
-      //         Authorization: `Bearer ${token}`,
-      //         "Content-Type": "multipart/form-data",
-      //       },
-      //     })
-      //     .then((response) => {
-      //       // 업데이트 성공 처리
-      //       // 업데이트 후에 필요한 작업을 수행할 수 있습니다.
-      //     })
-      //     .catch((error) => {
-      //       console.log("updateUserProfile API 요청 실패:", error);
-      //     });
+      // ...
     }
   };
 
@@ -134,6 +116,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         },
       })
       .then((response) => {
+        console.log("updateNinkname API 요청 셩공", newNickname);
         // 닉네임 업데이트 성공 처리
         // 업데이트 후에 필요한 작업을 수행할 수 있습니다.
       })
