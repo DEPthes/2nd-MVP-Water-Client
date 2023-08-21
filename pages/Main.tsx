@@ -8,6 +8,7 @@ import Home from "./Home";
 import MyPage from "./MyPage";
 import styled from "styled-components/native";
 import CustomHeader from "../components/molecule/header/CustomHeader";
+import Login from "./Join/login";
 
 const Main = () => {
   const Tab = createBottomTabNavigator();
