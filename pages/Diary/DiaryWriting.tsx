@@ -34,7 +34,7 @@ export const DiaryWriting = ({ navigation }: { navigation: any }) => {
     // API 요청 헤더 설정
     const headers = {
       Authorization:
-        "Bearer h6ftIf5Eq-s1Ci9awfce4AgweBwU2AWhLlLvGE07Cj1zmwAAAYoNjfBe",
+        "Bearer KvOxVva9xKjsl2mZ44aLt8Wa_bJCvhWaBDQcqEVfCiolTgAAAYoSco7Z",
       "Content-Type": "application/json",
     };
 
@@ -99,10 +99,10 @@ export const DiaryWriting = ({ navigation }: { navigation: any }) => {
                   align="left"
                   color="black"
                 />
-                <StyledTextInput // Inout
+                <StyledTextInput
                   multiline={true}
                   placeholder="터치하여 일기 쓰기"
-                  value={inputContent} // Set the value of the input
+                  value={inputContent}
                   onChangeText={(text: string) => setInputContent(text)} // Update the inputContetn state
                 />
               </DiaryWritingBox>
