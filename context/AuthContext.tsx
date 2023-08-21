@@ -63,10 +63,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const logout = () => {
     setIsAuthenticated(false);
+    setToken("");
   };
 
   useEffect(() => {
-    login();
+    // login();
   }, []);
 
   const updateUserProfile = async (image: string | null) => {

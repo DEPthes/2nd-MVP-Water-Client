@@ -7,6 +7,7 @@ import {
   NativeSyntheticEvent,
   TextInputChangeEventData,
   TextInput,
+  TouchableOpacity,
 } from "react-native";
 import React, { useEffect } from "react";
 import Background from "../components/atom/background/Background";
@@ -19,8 +20,18 @@ import { useState } from "react";
 import { useRef } from "react";
 import MyPageWidget from "@/components/organisms/widget/MyPageWidget";
 import * as ImagePicker from "expo-image-picker";
+import { useAuth } from "@/context/AuthContext";
+import { RouteProp, NavigationProp } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RouteParamList } from "@/components/molecule/RouteParamList";
 
-const MyPage = () => {
+type MyPageNavigationProps = StackNavigationProp<RouteParamList, "Main">;
+
+interface MyPageProps {
+  navigation: MyPageNavigationProps;
+}
+
+const MyPage: React.FC<MyPageProps> = ({ navigation }) => {
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
   const [crystalCount, setCrystalCount] = useState(0);
@@ -28,7 +39,7 @@ const MyPage = () => {
   const [isEditingNickname, setIsEditingNickName] = useState(false);
   const textInputRef = useRef<TextInput | null>(null);
   const [isImageChangeOn, setIsImageChangeOn] = useState(false);
-
+  const { token, logout } = useAuth();
   const ImageChangeModalOffHandler = () => {
     setIsImageChangeOn(false);
   };
@@ -69,18 +80,17 @@ const MyPage = () => {
         image: formData,
       };
       const headers = {
-        Authorization:
-          "Bearer KvOxVva9xKjsl2mZ44aLt8Wa_bJCvhWaBDQcqEVfCiolTgAAAYoSco7Z",
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       };
 
       axios
         .patch(apiUrl, requestBody, { headers })
         .then((response) => {
-          console.log("API 요청 성공:", response.data.data);
+          console.log("image API 요청 성공:", response.data.data);
         })
         .catch((error) => {
-          console.error("API 요청 실패:", error);
+          console.error("image API 요청 실패:", error);
         });
     }
 
@@ -91,8 +101,7 @@ const MyPage = () => {
     const apiUrl = `http://3.36.4.36:8080/mypage/default-image`;
     const requestBody = {};
     const headers = {
-      Authorization:
-        "Bearer KvOxVva9xKjsl2mZ44aLt8Wa_bJCvhWaBDQcqEVfCiolTgAAAYoSco7Z",
+      Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     };
 
@@ -102,7 +111,7 @@ const MyPage = () => {
         setImage(response.data.data.profileImageUrl);
       })
       .catch((error) => {
-        console.error("API 요청 실패:", error);
+        console.error(" default-image API 요청 실패:", error);
       });
     setIsImageChangeOn(false);
   };
@@ -115,18 +124,17 @@ const MyPage = () => {
         newNickname: name,
       };
       const headers = {
-        Authorization:
-          "Bearer KvOxVva9xKjsl2mZ44aLt8Wa_bJCvhWaBDQcqEVfCiolTgAAAYoSco7Z",
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       };
 
       axios
         .patch(apiUrl, requestBody, { headers })
         .then((response) => {
-          console.log("API 요청 성공:", response.data.data);
+          console.log("nickname API 요청 성공:", response.data.data);
         })
         .catch((error) => {
-          console.error("API 요청 실패:", error);
+          console.error("nickname API 요청 실패:", error);
         });
       setIsEditingNickName(false);
     }
@@ -141,13 +149,28 @@ const MyPage = () => {
     }, 0);
   };
 
+  const handleLogout = async () => {
+    const logoutUrl = "http://3.36.4.36:8080/auth/logout";
+
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
+    try {
+      await axios.post(logoutUrl, {}, { headers });
+      logout();
+      navigation.navigate("Login"); // "Login"에는 실제 로그인 화면 컴포넌트의 이름을 사용해야 합니다.
+    } catch (error) {
+      console.log("로그아웃 실패:", error);
+    }
+  };
+
   useEffect(() => {
-    const apiUrl = `http://3.36.4.36:8080/mypage/`;
+    const apiUrl = "http://3.36.4.36:8080/mypage/";
 
     // API 요청 헤더 설정s
     const headers = {
-      Authorization:
-        "Bearer KvOxVva9xKjsl2mZ44aLt8Wa_bJCvhWaBDQcqEVfCiolTgAAAYoSco7Z",
+      Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     };
 
@@ -155,14 +178,14 @@ const MyPage = () => {
     axios
       .get(apiUrl, { headers })
       .then((response) => {
-        console.log("API 요청 성공:", response.data.data.image);
+        console.log("mypage API 요청 성공:", response.data.data.image);
         setName(response.data.data.nickname);
         setSinceDate(response.data.data.sinceDate);
         setImage(response.data.data.image);
         setCrystalCount(response.data.data.crystalCount);
       })
       .catch((error) => {
-        console.error("API 요청 실패:", error);
+        console.error("mypage API 요청 실패:", error);
       });
   }, []);
   return (
@@ -237,21 +260,16 @@ const MyPage = () => {
             </InformationBannerContainer>
             <Line />
             <ButtonContainer>
-              <MolButton
-                ColorType="white"
-                SizeType="long"
-                text="로그아웃"
-                textSize="12"
-                textWeight="regular"
-              />
-              <MolButton
-                ColorType="white"
-                SizeType="long"
-                text="탈퇴하기"
-                textSize="12"
-                textWeight="regular"
-                mt="14"
-              />
+              <TouchableOpacity onPress={handleLogout}>
+                <ButtonWrapper>
+                  <ButtonText>로그아웃</ButtonText>
+                </ButtonWrapper>
+              </TouchableOpacity>
+              <TouchableOpacity>
+                <ButtonWrapper>
+                  <ButtonText>탈퇴하기</ButtonText>
+                </ButtonWrapper>
+              </TouchableOpacity>
             </ButtonContainer>
             <MolText
               color="black"
@@ -315,8 +333,10 @@ const Line = styled.View`
 const ButtonContainer = styled.View`
   width: 100%;
   display: flex;
+
+  flex-direction: column;
   align-items: center;
-  margin-top: 26px;
+  justify-content: center;
 `;
 
 const NicknameTextInput = styled.TextInput`
@@ -333,7 +353,6 @@ const ProfileImageFixIconContainer = styled.Pressable`
   width: 24px;
   height: 24px;
   border-radius: 50px;
-  background-color: #d9d9d9;
   position: absolute;
   bottom: 0px;
   right: 0px;
@@ -350,4 +369,26 @@ const WidgetContainer = styled.Pressable`
   background: rgba(48, 48, 48, 0.7);
   position: absolute;
   z-index: 1;
+`;
+
+const ButtonWrapper = styled.View`
+  width: 306px;
+  height: 34px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: #fff;
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+const ButtonText = styled.Text`
+  color: #000;
+  text-align: center;
+  font-size: 12.75px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 `;

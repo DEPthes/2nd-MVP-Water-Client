@@ -15,18 +15,14 @@ const Login = () => {
   const [webViewUrl, setWebViewUrl] = React.useState("");
   const [isLoading, setLoading] = React.useState(false);
 
-  const { isAuthenticated, setIsAuthenticated, setToken, setUserInfo } =
+  const { isAuthenticated, setIsAuthenticated, setToken, setUserInfo, token } =
     useAuth();
   const consentCompleteUrl = "http://3.36.4.36:8080/auth/kakao?code=";
   const navigation = useNavigation<any>();
 
   const handleButtonPress = () => {
-    if (isAuthenticated) {
-      setWebViewVisible(false);
-    } else {
-      setWebViewVisible(true); // 웹뷰 보이게 설정
-      setWebViewUrl("http://3.36.4.36:8080/auth/login");
-    }
+    setWebViewVisible(true); // 웹뷰 보이게 설정
+    setWebViewUrl("http://3.36.4.36:8080/auth/login");
   };
 
   const params = {
@@ -58,6 +54,7 @@ const Login = () => {
             setWebViewVisible(false);
             setLoading(false);
             navigation.navigate("ProfileSetting");
+            return;
           } else {
             setIsAuthenticated(false);
           }
@@ -103,7 +100,7 @@ const Login = () => {
         </>
       ) : (
         <Background>
-          {isAuthenticated ? (
+          {token ? (
             <Container style={{ paddingBottom: windowHeight * 0.1 }}>
               <TouchableOpacity onPress={handleStartPress}>
                 <ImgContainer style={{ paddingBottom: windowHeight * 0.2 }}>

@@ -29,7 +29,7 @@ const CustomHeader = ({
   return (
     <SafeAreaViewComponent>
       <HeaderContainer>
-        <View>
+        <BackButtonWrapper>
           {showBackButton && (
             <Pressable onPress={() => navigation.goBack()}>
               <BackButtonContainer>
@@ -37,28 +37,21 @@ const CustomHeader = ({
               </BackButtonContainer>
             </Pressable>
           )}
-        </View>
-        <View>
-          <MolText
-            label={title}
-            size="17"
-            weight="regular"
-            align="center"
-            color={"black"}
-          />
-        </View>
-        {showBottomLine && <BottomLine />}
+        </BackButtonWrapper>
+        <TextContainer>
+          <TextWrapper>{title}</TextWrapper>
+        </TextContainer>
       </HeaderContainer>
+      {showBottomLine && <BottomLine />}
     </SafeAreaViewComponent>
   );
 };
 
 const HeaderContainer = styled.View`
-  padding-top: 8px;
-
+  padding-top: 12px;
   display: flex;
-  flex-direction: column;
-  align-content: center;
+  flex-direction: row;
+  align-items: center;
   justify-content: center;
 `;
 
@@ -70,6 +63,27 @@ const BottomLine = styled.View`
   background: #333;
 `;
 
-const BackButtonContainer = styled.View``;
+const BackButtonContainer = styled.View`
+  margin-left: 8px;
+  width: 20px;
+
+  margin-top: 8px;
+`;
+
+const TextWrapper = styled.Text`
+  color: #000;
+  font-size: 17px;
+  font-style: normal;
+  font-weight: 600;
+`;
+
+const TextContainer = styled.View`
+  width: 220px;
+`;
+
+const BackButtonWrapper = styled.View`
+  width: 126px;
+  text-align: left;
+`;
 
 export default CustomHeader;

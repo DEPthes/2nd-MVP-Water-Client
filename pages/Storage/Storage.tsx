@@ -21,14 +21,10 @@ const Storage = ({ navigation }: StorageProps) => {
 
   useEffect(() => {
     const apiUrl = `http://3.36.4.36:8080/crystal/all`;
-
-    // API 요청 헤더 설정
     const headers = {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     };
-
-    // POST 요청 보내기
     axios
       .get(apiUrl, { headers })
       .then((response) => {
@@ -48,8 +44,14 @@ const Storage = ({ navigation }: StorageProps) => {
         red={item.red}
         green={item.green}
         blue={item.blue}
-        image={test}
-        onPress={() => navigation.navigate("CrystalReply")}
+        onPress={() =>
+          navigation.navigate("CrystalReply", {
+            crystalId: item.crystalId,
+            red: item.red,
+            green: item.green,
+            blue: item.blue,
+          })
+        }
       />
     </GridItem>
   );
@@ -91,7 +93,7 @@ const GridItem = styled.View`
   justify-content: flex-start;
   height: 100px;
   border-width: 1px;
-  border-color: lightgray;
+  border-color: rgba(0, 0, 0, 0);
   border-radius: 8px;
 `;
 

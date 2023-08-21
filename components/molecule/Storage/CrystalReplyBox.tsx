@@ -1,30 +1,58 @@
-import { View, Text } from "react-native";
+import { View, Text, FlatList } from "react-native";
 import React from "react";
 import ReplyBox from "./ReplyBox";
+import { styled } from "styled-components/native";
+import MolText from "@/components/atom/Text/Text";
 
-const CrystalReplyBox = () => {
+interface CrystalReplyBoxProps {
+  replies: { date: string; content: string }[];
+}
+
+const CrystalReplyBox = ({ replies }: CrystalReplyBoxProps) => {
+  const renderItem = ({
+    item,
+  }: {
+    item: { date: string; content: string };
+  }) => <ReplyBox date={item.date} content={item.content} />;
+
   return (
-    <View>
-      <ReplyBox
-        date={"2023/08/02 WED"}
-        content={
-          "정말 너무 힘들었겠다...나였어도 그렇게 반응했을거야. 그래도 잘 참아줬어. 대견하고 기특하다."
-        }
-      />
-      <ReplyBox
-        date={"2023/08/02 WED"}
-        content={
-          "정말 너무 힘들었겠다...나였어도 그렇게 반응했을거야. 그래도 잘 참아줬어. 대견하고 기특하다."
-        }
-      />
-      <ReplyBox
-        date={"2023/08/02 WED"}
-        content={
-          "정말 너무 힘들었겠다...나였어도 그렇게 반응했을거야. 그래도 잘 참아줬어. 대견하고 기특하다."
-        }
-      />
-    </View>
+    <Container>
+      <HeaderContainer>
+        <MolText
+          color={"black"}
+          label={"내 결정에 대한 답변들"}
+          align={"center"}
+          size="22"
+          weight="bold"
+        />
+      </HeaderContainer>
+
+      <ListContainer>
+        <FlatList
+          data={replies}
+          renderItem={renderItem}
+          keyExtractor={(item, index) => index.toString()}
+          numColumns={2}
+        />
+      </ListContainer>
+    </Container>
   );
 };
 
 export default CrystalReplyBox;
+
+const Container = styled.View`
+  display: flex;
+`;
+
+const HeaderContainer = styled.View`
+  padding-top: 24px;
+  padding-bottom: 24px;
+`;
+
+const ListContainer = styled.View`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+`;
