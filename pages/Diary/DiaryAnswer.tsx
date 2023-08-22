@@ -39,11 +39,11 @@ const DiaryAnswer = (props: ownProps) => {
     axios
       .post(apiUrl, requestBody, { headers })
       .then((response) => {
-        console.log("API 요청 성공:", response.data);
+        console.log("answerType API 요청 성공:", response.data);
         setChatResponse(response.data.data);
       })
       .catch((error) => {
-        console.error("API 요청 실패:", error);
+        console.error("answerType API 요청 실패:", error);
       });
   }, []);
 
@@ -61,10 +61,10 @@ const DiaryAnswer = (props: ownProps) => {
     axios
       .post(apiUrl, requestBody, { headers })
       .then((response) => {
-        console.log("API 요청 성공:", response.data);
+        console.log("save API 요청 성공:", response.data);
       })
       .catch((error) => {
-        console.error("API 요청 실패:", error);
+        console.error("save API 요청 실패:", error);
       });
     setIsModalShown(true);
     setIsAfterAnswer(true);
@@ -78,7 +78,7 @@ const DiaryAnswer = (props: ownProps) => {
     axios
       .get(apiUrl, { headers })
       .then((response) => {
-        console.log("API 요청 성공:", response.data);
+        console.log("comments API 요청 성공:", response.data);
         const newAnswerCount = response.data.data;
 
         // answerCount에 따른 조건문 추가
@@ -95,7 +95,7 @@ const DiaryAnswer = (props: ownProps) => {
         }
       })
       .catch((error) => {
-        console.error("API 요청 실패:", error);
+        console.error("comments API 요청 실패:", error);
       });
   };
 
