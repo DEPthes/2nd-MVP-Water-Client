@@ -7,6 +7,7 @@ import MolButton from "../../components/atom/Button/MolButton";
 import axios from "axios";
 import AfterAnswerWidget from "@/components/organisms/widget/AfterAnswerWidget";
 import EvolvingWidget from "@/components/organisms/widget/EvolvingWidget";
+import { useAuth } from "@/context/AuthContext";
 
 type ownProps = {
   navigation: any;
@@ -14,6 +15,7 @@ type ownProps = {
 };
 
 const DiaryAnswer = (props: ownProps) => {
+  const { token } = useAuth();
   const { navigation, route } = props;
   const { emotionId, myCrystalCount, inputContent, answerType } = route.params;
   const [chatResponse, setChatResponse] = useState<string>("");
@@ -21,31 +23,28 @@ const DiaryAnswer = (props: ownProps) => {
   const [isAfterAnswer, setIsAfterAnswer] = useState(false);
   const [isWaterChange, setIsWaterChange] = useState(false);
   const [isWaterEvolving, setIsWaterEvolving] = useState(false);
-
+  const headers = {
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
+  };
   useEffect(() => {
-    // const apiUrl = `http://3.36.4.36:8080/comment/${answerType}`;
-    // const requestBody = {
-    //   diary: inputContent,
-    // };
+    const apiUrl = `http://3.36.4.36:8080/comment/${answerType}`;
+    const requestBody = {
+      diary: inputContent,
+    };
 
-    // // API 요청 헤더 설정
-    // const headers = {
-    //   Authorization:
-    //     "Bearer mA5GsYhjZhxhsoHn2R4rzEY-kYgbRQniiCBLtNntCiolUAAAAYoTwGNw",
-    //   "Content-Type": "application/json",
-    // };
+    // API 요청 헤더 설정
 
-    // // POST 요청 보내기
-    // axios
-    //   .post(apiUrl, requestBody, { headers })
-    //   .then((response) => {
-    //     console.log("API 요청 성공:", response.data);
-    //     setChatResponse(response.data.data);
-    //   })
-    //   .catch((error) => {
-    //     console.error("API 요청 실패:", error);
-    //   });
-    setChatResponse("sival");
+    // POST 요청 보내기
+    axios
+      .post(apiUrl, requestBody, { headers })
+      .then((response) => {
+        console.log("API 요청 성공:", response.data);
+        setChatResponse(response.data.data);
+      })
+      .catch((error) => {
+        console.error("API 요청 실패:", error);
+      });
   }, []);
 
   const CloseButtonHandler = () => {
@@ -57,11 +56,6 @@ const DiaryAnswer = (props: ownProps) => {
     };
 
     // API 요청 헤더 설정
-    const headers = {
-      Authorization:
-        "Bearer mA5GsYhjZhxhsoHn2R4rzEY-kYgbRQniiCBLtNntCiolUAAAAYoTwGNw",
-      "Content-Type": "application/json",
-    };
 
     // POST 요청 보내기
     axios
@@ -80,13 +74,6 @@ const DiaryAnswer = (props: ownProps) => {
     setIsAfterAnswer(false);
     const apiUrl = `http://3.36.4.36:8080/crystal/comments`;
 
-    // API 요청 헤더 설정
-    const headers = {
-      Authorization:
-        "Bearer mA5GsYhjZhxhsoHn2R4rzEY-kYgbRQniiCBLtNntCiolUAAAAYoTwGNw",
-      "Content-Type": "application/json",
-    };
-
     // POST 요청 보내기
     axios
       .get(apiUrl, { headers })
@@ -103,6 +90,8 @@ const DiaryAnswer = (props: ownProps) => {
         ) {
           console.log("분기점이다!");
           setIsWaterChange(true);
+        } else {
+          navigation.navigate("Home");
         }
       })
       .catch((error) => {
@@ -153,9 +142,10 @@ const DiaryAnswer = (props: ownProps) => {
                 <MolText
                   label={chatResponse}
                   size="17"
-                  weight="regular"
+                  weight="bold"
                   align="left"
                   color="black"
+                  mt="-40"
                 />
               </ScrollViewContainer>
             </DiaryWritingBox>

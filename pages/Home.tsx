@@ -5,10 +5,12 @@ import styled from "styled-components/native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useIsFocused } from "@react-navigation/native";
 import axios from "axios";
+import { useAuth } from "@/context/AuthContext";
 
 const Home = ({ navigation }: { navigation: any }) => {
   const isFocused = useIsFocused();
   const [answerCount, setAnswerCount] = useState(0);
+  const { token } = useAuth();
 
   const waters = {
     first: require("@/assets/png/water01.png"),
@@ -24,8 +26,7 @@ const Home = ({ navigation }: { navigation: any }) => {
       const apiUrl = `http://3.36.4.36:8080/crystal/comments`;
       // API 요청 헤더 설정
       const headers = {
-        Authorization:
-          "Bearer mA5GsYhjZhxhsoHn2R4rzEY-kYgbRQniiCBLtNntCiolUAAAAYoTwGNw",
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       };
       // POST 요청 보내기
