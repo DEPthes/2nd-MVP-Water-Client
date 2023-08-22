@@ -103,7 +103,7 @@ const Login = () => {
           {token ? (
             <Container style={{ paddingBottom: windowHeight * 0.1 }}>
               <TouchableOpacity onPress={handleStartPress}>
-                <ImgContainer style={{ paddingBottom: windowHeight * 0.2 }}>
+                <ImgContainer style={{ paddingBottom: windowHeight * 3 }}>
                   <ServiceImg
                     source={require("../../assets/png/Login-ServiceName.png")}
                   />
@@ -117,7 +117,7 @@ const Login = () => {
               </TouchableOpacity>
             </Container>
           ) : (
-            <Container style={{ paddingBottom: windowHeight * 0.1 }}>
+            <Container style={{ paddingBottom: windowHeight * 0.2 }}>
               <ImgContainer>
                 <ServiceImg
                   source={require("../../assets/png/Login-ServiceName.png")}
