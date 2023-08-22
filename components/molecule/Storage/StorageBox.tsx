@@ -18,7 +18,7 @@ const StorageBox = (props: ownProps) => {
   return (
     <TouchableBoxContainer onPress={onPress}>
       <ImgWrapper>
-        <Crystal red={red} green={green} blue={blue} />
+        <Crystal red={red} green={green} blue={blue} width={100} height={100} />
       </ImgWrapper>
     </TouchableBoxContainer>
   );
