@@ -144,7 +144,7 @@ const UpperBanner = styled.View`
 
 const DiaryWritingBox = styled.View`
   width: 320px;
-  height: 455px;
+  height: 255px;
   border-radius: 22px;
   background-color: #e3f5fd;
   margin-top: 27px;

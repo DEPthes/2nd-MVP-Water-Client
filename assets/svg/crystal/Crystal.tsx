@@ -5,14 +5,18 @@ const Crystal = ({
   red,
   green,
   blue,
+  width,
+  height,
 }: {
   red: number;
   green: number;
   blue: number;
+  width: number;
+  height: number;
 }) => {
   // fill:#40c5ff
   return (
-    <Svg id="_레이어_1" width={100} height={100} viewBox="0 0 1024 1024">
+    <Svg id="_레이어_1" width={width} height={height} viewBox="0 0 1024 1024">
       <G>
         <Path
           fill={`rgb(${red}, ${green}, ${blue})`}

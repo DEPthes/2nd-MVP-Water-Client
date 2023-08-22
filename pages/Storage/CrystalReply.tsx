@@ -6,6 +6,7 @@ import CrystalReplyBox from "../../components/molecule/Storage/CrystalReplyBox";
 import axios from "axios";
 import { useAuth } from "@/context/AuthContext";
 import { useRoute } from "@react-navigation/native";
+import Crystal from "@/assets/svg/crystal/Crystal";
 
 interface CrystalReplyParams {
   crystalId: number;
@@ -50,8 +51,13 @@ const CrystalReply = () => {
     <Background>
       <Container>
         <CrystalContainer>
-          {/* Use selectedCrystalFake for the CrystalImage */}
-          <CrystalImage source={{ uri: selectedCrystalFake }} />
+          <Crystal
+            red={red}
+            green={green}
+            blue={blue}
+            width={230}
+            height={230}
+          />
         </CrystalContainer>
         <FlatList
           data={[{ key: "unique-key" }]}
