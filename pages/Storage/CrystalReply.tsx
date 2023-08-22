@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, FlatList } from "react-native";
+import { View, Text, ScrollView, FlatList, Image } from "react-native";
 import React, { useEffect, useState } from "react";
 import Background from "../../components/atom/background/Background";
 import styled from "styled-components/native";
@@ -6,19 +6,25 @@ import CrystalReplyBox from "../../components/molecule/Storage/CrystalReplyBox";
 import axios from "axios";
 import { useAuth } from "@/context/AuthContext";
 import { useRoute } from "@react-navigation/native";
-import { Double } from "react-native/Libraries/Types/CodegenTypes";
 
 interface CrystalReplyParams {
   crystalId: number;
   red: number;
   green: number;
   blue: number;
+  selectedCrystalFake: string; // Add selectedCrystalFake to route params
 }
 
 const CrystalReply = () => {
   const { token } = useAuth();
   const route = useRoute();
-  const { crystalId, red, green, blue } = route.params as CrystalReplyParams;
+  const {
+    crystalId,
+    red,
+    green,
+    blue,
+    selectedCrystalFake, // Retrieve selectedCrystalFake from route params
+  } = route.params as CrystalReplyParams;
   const [replies, setReplies] = useState<{ date: string; content: string }[]>(
     []
   );
@@ -34,7 +40,6 @@ const CrystalReply = () => {
       .then((response) => {
         console.log("crystal/{crystalId} API 요청 성공:", response.data.data);
         setReplies(response.data.data);
-        console.log(replies);
       })
       .catch((error) => {
         console.log("crystal/{crystalId} API 요청 실패:", error);
@@ -45,10 +50,11 @@ const CrystalReply = () => {
     <Background>
       <Container>
         <CrystalContainer>
-          <CryStalImage source={require("../../assets/png/crystalTest2.png")} />
+          {/* Use selectedCrystalFake for the CrystalImage */}
+          <CrystalImage source={{ uri: selectedCrystalFake }} />
         </CrystalContainer>
         <FlatList
-          data={[{ key: "unique-key" }]} // 임의의 고유한 키를 사용
+          data={[{ key: "unique-key" }]}
           renderItem={({ item }) => (
             <ReplyBoxContainer>
               <CrystalReplyBox replies={replies} />
@@ -76,7 +82,8 @@ const CrystalContainer = styled.View`
   position: absolute;
   top: 0;
 `;
-const CryStalImage = styled.Image`
+
+const CrystalImage = styled.Image`
   width: 254px;
   height: 223px;
 `;

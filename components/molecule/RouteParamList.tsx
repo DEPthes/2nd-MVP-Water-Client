@@ -8,5 +8,6 @@ export type RouteParamList = {
   ReplyBoxDetail: undefined;
   Login: undefined;
   ProfileSetting: undefined;
-  SplashMain: undefined;
+  AppLoading: undefined;
+  SplashLoading: undefined;
 };

@@ -25,9 +25,10 @@ import DiaryAnswer from "./pages/Diary/DiaryAnswer";
 import Login from "./pages/Join/Login";
 import { AuthProvider } from "./context/AuthContext";
 
-import SplashMain from "./pages/Splash/SplashMain";
+import AppLoading from "./pages/Splash/AppLoading";
 import ProfileSetting from "./pages/Join/ProfileSetting";
 import ReplyBoxDetail from "./pages/Storage/ReplyBoxDetail";
+import SplashLoading from "./pages/Splash/SplashLoading";
 
 interface Warning {
   message: string;
@@ -38,7 +39,12 @@ function App() {
   return (
     <NavigationContainer>
       <AuthProvider>
-        <Tab.Navigator initialRouteName="Login">
+        <Tab.Navigator initialRouteName="SplashLoading">
+          <Tab.Screen
+            name="SplashLoading"
+            component={SplashLoading}
+            options={{ headerShown: false }}
+          />
           <Tab.Screen
             name="Main"
             component={Main}
@@ -137,8 +143,8 @@ function App() {
             })}
           />
           <Tab.Screen
-            name="SplashMain"
-            component={SplashMain}
+            name="AppLoading"
+            component={AppLoading}
             options={() => ({
               headerTransparent: true,
               headerTitle: "",

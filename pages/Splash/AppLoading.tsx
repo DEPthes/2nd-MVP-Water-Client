@@ -3,7 +3,7 @@ import React from "react";
 import Background from "@/components/atom/background/Background";
 import styled from "styled-components/native";
 
-const SplashMain = () => {
+const AppLoading = () => {
   const windowHeight = Dimensions.get("window").height;
   return (
     <Background>
@@ -18,7 +18,7 @@ const SplashMain = () => {
   );
 };
 
-export default SplashMain;
+export default AppLoading;
 
 const Container = styled.View`
   display: flex;
