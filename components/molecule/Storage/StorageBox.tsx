@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components/native";
-import { Image, TouchableOpacity } from "react-native";
+import { Image, Text, TouchableOpacity, View } from "react-native";
 import crystal from "../../../types/crystal";
 import crystal6_test from "@/assets/svg/crystal/crystal6_test.svg";
+import Crystal from "@/assets/svg/crystal/Crystal";
 
 interface BoxProps {
   onPress?: () => void; // Add onPress prop
@@ -16,7 +17,9 @@ const StorageBox = (props: ownProps) => {
   const { onPress, crystalId, red, green, blue } = props;
   return (
     <TouchableBoxContainer onPress={onPress}>
-      <ImgWrapper>{crystal6_test}</ImgWrapper>
+      <ImgWrapper>
+        <Crystal red={red} green={green} blue={blue} />
+      </ImgWrapper>
     </TouchableBoxContainer>
   );
 };
@@ -42,4 +45,7 @@ const ImgWrapper = styled.View`
   width: 100%;
   height: 100%;
   border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
