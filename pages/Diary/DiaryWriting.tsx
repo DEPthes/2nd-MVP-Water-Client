@@ -12,8 +12,10 @@ import MolText from "../../components/atom/Text/Text";
 import MolButton from "../../components/atom/Button/MolButton";
 import Widget from "../../components/organisms/widget/Widget";
 import axios from "axios";
+import { useAuth } from "@/context/AuthContext";
 
 export const DiaryWriting = ({ navigation }: { navigation: any }) => {
+  const { token } = useAuth();
   const [onWidget, setOnWidget] = useState<boolean>(false);
 
   const [inputContent, setInputContent] = useState("");
@@ -33,8 +35,7 @@ export const DiaryWriting = ({ navigation }: { navigation: any }) => {
 
     // API 요청 헤더 설정
     const headers = {
-      Authorization:
-        "Bearer KvOxVva9xKjsl2mZ44aLt8Wa_bJCvhWaBDQcqEVfCiolTgAAAYoSco7Z",
+      Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     };
 
